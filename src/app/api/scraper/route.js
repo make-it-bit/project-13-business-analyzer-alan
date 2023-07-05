@@ -8,11 +8,8 @@ export async function GET(request) {
 
   if (name) {
     const organizationPageUrl = await getOrganizationPageUrl(name);
-    console.log('organizationPageUrl: ', organizationPageUrl);
     const organizationData = await getOrganizationData(organizationPageUrl);
-    console.log('organizationData: ', organizationData);
-
-    return NextResponse.json({ ok: 'ok' });
+    return NextResponse.json(organizationData);
   }
 
   return NextResponse.json({ error: 'Name value not provided' });
