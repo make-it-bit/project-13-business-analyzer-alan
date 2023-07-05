@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-const Form = () => {
+const Form = ({ onSubmit }) => {
   const [organizationName, setOrganizationName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -11,22 +11,17 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const name = await validateOrganizationName(organizationName);
-      console.log('name: ', name);
-    } catch (error) {
-      console.log(error);
+    const name = validateOrganizationName(organizationName);
+    if (name) {
+      onSubmit(name);
     }
   };
 
   const validateOrganizationName = (name) => {
-    return new Promise((resolve, reject) => {
-      if (name) {
-        setErrorMessage('');
-        return name.trim();
-      }
-      setErrorMessage('this is an error');
-    });
+    if (name) {
+      setErrorMessage('');
+      return name.trim();
+    } else setErrorMessage('this is an error');
   };
 
   return (
