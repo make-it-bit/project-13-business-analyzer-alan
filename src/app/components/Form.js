@@ -21,23 +21,44 @@ const Form = ({ onSubmit }) => {
     if (name) {
       setErrorMessage('');
       return name.trim();
-    } else setErrorMessage('this is an error');
+    } else setErrorMessage('name cannot be empty');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Organization name:
-        <input
-          className="border-2 border-black"
-          type="text"
-          value={organizationName}
-          onChange={handleInputChange}
-        />
-      </label>
-      <button type="submit">Submit</button>
-      {errorMessage && <p className="text-red-600 font-bold">{errorMessage}</p>}
-    </form>
+    <div className="flex flex-col">
+      <form
+        className="bg-white shadow-xl shadow-purple-500 rounded border-2 border-purple-800 px-8 pt-6 pb-8 mb-20"
+        onSubmit={handleSubmit}
+      >
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="organization"
+          >
+            Organization name
+          </label>
+          <input
+            className="shadow appearance-none border border-gray-400 border-glowing rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+            id="organization"
+            type="text"
+            placeholder="e.g. selver as"
+            value={organizationName}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="flex items-center justify-between">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Go!
+          </button>
+          {errorMessage && (
+            <p className="text-red-600 font-bold">{errorMessage}</p>
+          )}
+        </div>
+      </form>
+    </div>
   );
 };
 
