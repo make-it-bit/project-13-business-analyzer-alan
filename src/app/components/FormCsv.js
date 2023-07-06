@@ -2,26 +2,19 @@
 import { useState } from 'react';
 
 const Form = ({ onSubmit }) => {
-  const [organizationName, setOrganizationName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [file, setFile] = useState('');
 
   const handleInputChange = (e) => {
-    setOrganizationName(e.target.value);
+    setFile(e.target.files[0]);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const name = validateOrganizationName(organizationName);
-    if (name) {
-      onSubmit(name);
-    }
-  };
-
-  const validateOrganizationName = (name) => {
-    if (name) {
+    if (file) {
       setErrorMessage('');
-      return name.trim();
-    } else setErrorMessage('name cannot be empty');
+      onSubmit(file);
+    } else setErrorMessage('empty file');
   };
 
   return (
@@ -33,16 +26,16 @@ const Form = ({ onSubmit }) => {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="organization"
+            htmlFor="file"
           >
-            Organization name
+            Csv file
           </label>
           <input
             className="shadow appearance-none border border-gray-400 border-glowing rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
-            id="organization"
-            type="text"
-            placeholder="e.g. selver as"
-            value={organizationName}
+            id="file"
+            type="file"
+            placeholder="yourfile.csv"
+            accept=".csv"
             onChange={handleInputChange}
           />
         </div>

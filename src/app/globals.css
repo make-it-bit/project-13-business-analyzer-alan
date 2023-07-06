@@ -12,3 +12,42 @@
   border-color: rgb(130, 92, 130);
   box-shadow: 0 0 10px purple;
 }
+
+.loader {
+  width: 200px;
+  height: 16px;
+  position: relative;
+  border-radius: 50px;
+}
+
+.loader:after {
+  border-radius: 50px;
+  content: '';
+  position: absolute;
+  background-color: purple;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  animation: slide 0.7s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    right: 180px;
+    left: 2px;
+  }
+  5% {
+    left: 2px;
+  }
+  50% {
+    right: 2px;
+    left: 180px;
+  }
+  55% {
+    right: 2px;
+  }
+  100% {
+    right: 180px;
+    left: 2px;
+  }
+}
