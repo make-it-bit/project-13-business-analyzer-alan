@@ -12,7 +12,7 @@ const Navbar = () => {
         </h1>
         <h1 className="text-xl font-bold text-white grid place-content-center mb-2 md:mb-0">
           <Link href="/scraper/csv" className="text-white hover:text-black">
-            Google sheet fetch
+            CSV fetch
           </Link>
         </h1>
         <h1 className="text-xl font-bold text-white grid place-content-center mb-2 md:mb-0">

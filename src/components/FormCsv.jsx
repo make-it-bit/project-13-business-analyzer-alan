@@ -6,11 +6,14 @@ const Form = ({ onSubmit }) => {
   const [file, setFile] = useState('');
 
   const handleInputChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    localStorage.setItem('uploadedFile', selectedFile); // not in use yet
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (file) {
       setErrorMessage('');
       onSubmit(file);

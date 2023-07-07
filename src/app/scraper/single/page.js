@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-import Form from '@/app/components/FormSingle';
 import { useState } from 'react';
+import Form from '@/components/FormSingle';
 import Loading from './loading';
 
 const ScraperSinglePage = () => {
@@ -9,7 +9,7 @@ const ScraperSinglePage = () => {
   const [organizationData, setOrganizationData] = useState(null);
   const [organizationName, setOrganizationName] = useState(null);
 
-  const handleFormSubmit = (name) => {
+  const handleDataSubmit = (name) => {
     if (name) {
       setLoading(true);
       fetchOrganizationData(name);
@@ -54,7 +54,7 @@ const ScraperSinglePage = () => {
   return (
     <div className="flex flex-col min-h-screen justify-between">
       <div className="py-10 px-5 m-auto w-full sm:max-w-xl mt-10">
-        <Form onSubmit={handleFormSubmit} />
+        <Form onSubmit={handleDataSubmit} />
         {loading ? (
           <Loading />
         ) : (
