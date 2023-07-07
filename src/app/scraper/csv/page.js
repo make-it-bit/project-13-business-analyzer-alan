@@ -1,7 +1,7 @@
 'use client';
 import Form from '@/components/FormCsv';
 import Organizations from '@/components/Organizations';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const CsvScraperPage = () => {
   const [csvData, setCsvData] = useState(null);
