@@ -13,10 +13,12 @@ const ListItem = (organizationData) => {
   } = organizationData['organizationData'];
 
   return (
-    <li>
-      <Link href={`/organizations/${ärinimi}`}>{name}</Link>
-      <p>{website}</p>
-    </li>
+    <Link href={`/organizations/${ärinimi}`}>
+      <li className="border-b border-gray-300 py-4 flex items-center justify-between hover:bg-gray-100 p-3">
+        <p>{name}</p>
+        <p>{website}</p>
+      </li>
+    </Link>
   );
 };
 

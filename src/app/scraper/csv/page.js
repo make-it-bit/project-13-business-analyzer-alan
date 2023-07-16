@@ -36,7 +36,6 @@ const CsvScraperPage = () => {
 
         obj[key] = value;
       }
-
       result.push(obj);
     }
 
