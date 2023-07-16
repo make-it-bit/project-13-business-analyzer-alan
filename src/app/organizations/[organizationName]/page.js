@@ -13,7 +13,9 @@ export default async function Organization({ params }) {
             Data for{' '}
             <span className="text-gray-800">{decodeURI(organizationName)}</span>
           </p>
-          {organizationData && renderJsonData(organizationData)}
+          {/* {organizationData && renderJsonData(organizationData)} */}
+          {organizationData &&
+            renderSpecificData(organizationData, decodeURI(organizationName))}
         </div>
         <p className="text-center text-gray-500 text-xs">
           &copy;Hello, world! All rights reserved.
@@ -57,4 +59,39 @@ const renderJsonData = (data) => {
       );
     }
   });
+};
+
+// temp method, console output data
+const renderSpecificData = (data, name) => {
+  const res = [];
+  Object.entries(data).map(([key, value]) => {
+    key = key.replace(/_/g, ' ');
+
+    if (key === 'Üldinfo') {
+      // console.log(value);
+      // console.log(value['Registrikood']);
+      // console.log(value['Õiguslik_vorm']);
+      // console.log(value['Staatus']);
+      // console.log(value['Asutatud_ettevõtteregistris']);
+      // console.log(value['Registreeritud']);
+      res.push(value['Registrikood']);
+      res.push(value['Õiguslik_vorm']);
+      res.push(value['Staatus']);
+      res.push(value['Asutatud_ettevõtteregistris']);
+      res.push(value['Registreeritud']);
+    }
+
+    if (key === 'Maksualane info') {
+      // console.log(value['Riiklikud_maksud']);
+      // console.log(value['Tööjõumaksud']);
+      // console.log(value['Maksustatav_käive']);
+      // console.log(value['Töötajate_arv']);
+      res.push(value['Riiklikud_maksud']);
+      res.push(value['Tööjõumaksud']);
+      res.push(value['Maksustatav_käive']);
+      res.push(value['Töötajate_arv']);
+    }
+  });
+  console.log(`data for ${name}`);
+  console.log(res.join(','));
 };
