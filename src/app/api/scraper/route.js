@@ -9,7 +9,6 @@ export async function GET(request) {
   if (name) {
     const organizationPageUrl = await getOrganizationPageUrl(name);
     const organizationData = await getOrganizationData(organizationPageUrl);
-    console.log('organizationData: ', organizationData);
     return NextResponse.json(organizationData);
   }
 
