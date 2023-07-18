@@ -42,27 +42,27 @@ const CsvScraperPage = () => {
     setCsvData(result);
   };
 
-  // const beginLoopScraper = async (organizationsArray) => {
-  //   for (let elem of organizationsArray) {
-  //     try {
-  //       const organizationData = await fetchOrganizationData(elem['ärinimi']);
-  //       renderSpecificData(organizationData, elem['name']);
-  //     } catch {
-  //       console.log(`failed for ${elem['name']}`);
-  //     }
-  //   }
-  // };
+  const beginLoopScraper = async (organizationsArray) => {
+    for (let elem of organizationsArray) {
+      try {
+        const organizationData = await fetchOrganizationData(elem['ärinimi']);
+        renderSpecificData(organizationData, elem['name']);
+      } catch {
+        console.log(`failed for ${elem['name']}`);
+      }
+    }
+  };
 
-  // const fetchOrganizationData = async (name) => {
-  //   const response = await fetch(
-  //     `http://localhost:3000/api/scraper?name=${name}`
-  //   );
+  const fetchOrganizationData = async (name) => {
+    const response = await fetch(
+      `http://localhost:3000/api/scraper?name=${name}`
+    );
 
-  //   if (response) {
-  //     const data = await response.json();
-  //     return data;
-  //   }
-  // };
+    if (response) {
+      const data = await response.json();
+      return data;
+    }
+  };
 
   // temp method, console output data
   const renderSpecificData = (data, name) => {
@@ -71,12 +71,6 @@ const CsvScraperPage = () => {
       key = key.replace(/_/g, ' ');
 
       if (key === 'Üldinfo') {
-        // console.log(value);
-        // console.log(value['Registrikood']);
-        // console.log(value['Õiguslik_vorm']);
-        // console.log(value['Staatus']);
-        // console.log(value['Asutatud_ettevõtteregistris']);
-        // console.log(value['Registreeritud']);
         res.push(value['Registrikood']);
         res.push(value['Õiguslik_vorm']);
         res.push(value['Staatus']);
@@ -85,10 +79,6 @@ const CsvScraperPage = () => {
       }
 
       if (key === 'Maksualane info') {
-        // console.log(value['Riiklikud_maksud']);
-        // console.log(value['Tööjõumaksud']);
-        // console.log(value['Maksustatav_käive']);
-        // console.log(value['Töötajate_arv']);
         res.push(value['Riiklikud_maksud']);
         res.push(value['Tööjõumaksud']);
         res.push(value['Maksustatav_käive']);
@@ -105,9 +95,9 @@ const CsvScraperPage = () => {
         <Form onSubmit={handleFormSubmit} />
         {csvData && (
           <>
-            {/* <button className="bg-red-400" onClick={beginLoopScraper(csvData)}>
+            <button className="bg-red-400" onClick={beginLoopScraper(csvData)}>
               begin loop scraper
-            </button> */}
+            </button>
             <Organizations data={csvData} />
           </>
         )}

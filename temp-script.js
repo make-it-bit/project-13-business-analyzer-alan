@@ -35,5 +35,8 @@ const isOrganizationNameCorrect = (name1, name2) => {
   return true;
 };
 
-isOrganizationNameCorrect('mate as', 'aktsiaselts mate'); // --> true
-isOrganizationNameCorrect('selver food oü', 'selver food osaühing'); // --> true
+// console.log(isOrganizationNameCorrect('mate as', 'aktsiaselts mate')); // --> true
+// console.log(
+//   isOrganizationNameCorrect('selver food oü', 'selver food osaühing')
+// ); // --> true
+console.log(isOrganizationNameCorrect('ea group oü', 'Amaltea Group OÜ')); // --> false
