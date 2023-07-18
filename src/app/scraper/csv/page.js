@@ -2,6 +2,7 @@
 import Form from '@/components/FormCsv';
 import Organizations from '@/components/Organizations';
 import React, { useState, useEffect } from 'react';
+import { saveAs } from 'file-saver';
 
 const CsvScraperPage = () => {
   const [csvData, setCsvData] = useState(null);
@@ -43,14 +44,26 @@ const CsvScraperPage = () => {
   };
 
   const beginLoopScraper = async (organizationsArray) => {
+    const gatheredData = [];
     for (let elem of organizationsArray) {
       try {
         const organizationData = await fetchOrganizationData(elem['ärinimi']);
-        renderSpecificData(organizationData, elem['name']);
+        console.log(`success for ${elem['name']}`);
+        gatheredData.push(renderSpecificData(organizationData, elem['name']));
       } catch {
         console.log(`failed for ${elem['name']}`);
+        gatheredData.push(`failed for ${elem['name']}`);
       }
     }
+
+    const csvString = gatheredData.join('\n');
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8' });
+    const blobURL = URL.createObjectURL(blob);
+    const tempAnchor = document.createElement('a');
+    tempAnchor.href = blobURL;
+    tempAnchor.download = 'output.csv';
+    tempAnchor.click();
+    URL.revokeObjectURL(blobURL);
   };
 
   const fetchOrganizationData = async (name) => {
@@ -85,8 +98,9 @@ const CsvScraperPage = () => {
         res.push(value['Töötajate_arv']);
       }
     });
-    console.log(`data for ${name}`);
-    console.log(res.join(','));
+    // console.log(`data for ${name}`);
+    // console.log(res.join(','));
+    return res.join(',');
   };
 
   return (
@@ -95,9 +109,9 @@ const CsvScraperPage = () => {
         <Form onSubmit={handleFormSubmit} />
         {csvData && (
           <>
-            <button className="bg-red-400" onClick={beginLoopScraper(csvData)}>
+            {/* <button className="bg-red-400" onClick={beginLoopScraper(csvData)}>
               begin loop scraper
-            </button>
+            </button> */}
             <Organizations data={csvData} />
           </>
         )}
